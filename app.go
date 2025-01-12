@@ -6,26 +6,19 @@ import (
 )
 
 func main() {
-	// Declare a variable of type float64
-	var pv float64
-	var r float64 = 0.1
-	var n float64 = 1
+	pv := getUserInput("Enter the present value: ")
+	r := getUserInput("Enter the rate: ")
+	n := getUserInput("Enter the period: ")
 
-	// Prompt the user
-	pv = getUserInput("Enter the present value: ")
-	// Prompt the user
-	r = getUserInput("Enter the rate: ")
-	// Prompt the user
-	n = getUserInput("Enter the period: ")
-
-	// Calculate the future value
 	fv, interest := calculateFutureValue(pv, r, n)
 
+	printResults(fv, interest)
+}
+
+func printResults(fv, interest float64) {
 	formattedFVString := fmt.Sprintf("The future value is %.2f", fv)
 	fmt.Println(formattedFVString)
-
 	fmt.Printf("The interest is %.2f\n", interest)
-
 }
 
 func getUserInput(info string) float64 {
