@@ -12,19 +12,35 @@ func main() {
 	var n float64 = 1
 
 	// Prompt the user
-	fmt.Print("Enter the present value: ")
-	fmt.Scan(&pv)
+	pv = getUserInput("Enter the present value: ")
 	// Prompt the user
-	fmt.Print("Enter the rate: ")
-	fmt.Scan(&r)
+	r = getUserInput("Enter the rate: ")
 	// Prompt the user
-	fmt.Print("Enter the period: ")
-	fmt.Scan(&n)
+	n = getUserInput("Enter the period: ")
 
+	// Calculate the future value
+	fv, interest := calculateFutureValue(pv, r, n)
+
+	formattedFVString := fmt.Sprintf("The future value is %.2f", fv)
+	fmt.Println(formattedFVString)
+
+	fmt.Printf("The interest is %.2f\n", interest)
+
+}
+
+func getUserInput(info string) float64 {
+	var value float64
+	fmt.Print(info)
+	fmt.Scan(&value)
+	return value
+}
+
+func calculateFutureValue(pv, r, n float64) (fv float64, interest float64) {
 	r = r / 100
 	// Calculate the future value
-	fv := pv * math.Pow((1+r), n)
-
-	// Display the future value
-	fmt.Println("The future value is: ", fv)
+	fv = pv * math.Pow((1+r), n)
+	// Deduct the present value from the future value
+	interest = fv - pv
+	// return fv, interest
+	return
 }
